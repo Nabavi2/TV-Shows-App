@@ -37,33 +37,25 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Color(0xff171538),
         automaticallyImplyLeading: false,
         actions: [
+          TextField(
+            controller: _title,
+            decoration: InputDecoration(
+              hintText: 'Type movie name',
+              hintStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontStyle: FontStyle.italic,
+              ),
+              border: InputBorder.none,
+            ),
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
           IconButton(
             onPressed: () {
               _saveform();
-              setState(() {
-                ListTile(
-                  title: TextField(
-                    controller: _title,
-                    decoration: InputDecoration(
-                      hintText: 'Type movie name',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontStyle: FontStyle.italic,
-                      ),
-                      border: InputBorder.none,
-                    ),
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                );
-
-                // else {
-                //   customIcon = const Icon(Icons.search);
-                //   customSearchBar = const Text('Tab to the input');
-                // }
-              });
+              setState(() {});
             },
             icon: Icon(Icons.search),
           )
