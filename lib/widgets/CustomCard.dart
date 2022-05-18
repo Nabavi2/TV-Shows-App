@@ -44,17 +44,18 @@ class _CustomCardState extends State<CustomCard> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(9),
             ),
-            color: Colors.orange,
-            // color: Color(0xff171538),
+            // color: Colors.orange,
+            color: Color(0xff171538),
             child: Container(
               width: size.width,
-              height: size.height * 0.23,
+              height:
+                  size.width < 500 ? size.height * 0.23 : size.height * 0.30,
               child: ListTile(
                 title: Container(
                   margin: EdgeInsets.only(
                       left: size.width < 500
                           ? size.width * 0.28
-                          : size.width * 0.32,
+                          : size.width * 0.18,
                       top: 10),
                   child: Text(
                     widget.title,
@@ -70,11 +71,11 @@ class _CustomCardState extends State<CustomCard> {
                       width: size.width * 0.54,
                       height: size.width < 500
                           ? size.height * 0.14
-                          : size.height * 0.20,
+                          : size.height * 0.18,
                       margin: EdgeInsets.only(
                         left: size.width < 500
                             ? size.width * 0.28
-                            : size.width * 0.32,
+                            : size.width * 0.18,
                         right: size.width < 500 ? 10 : 0,
                         top: 5,
                         bottom: 10,
@@ -93,21 +94,17 @@ class _CustomCardState extends State<CustomCard> {
             ),
           ),
           Positioned(
-            width: size.width * 0.27,
-            height: size.width < 500 ? size.height * 0.27 : size.height * 0.42,
+            width: size.width < 500 ? size.width * 0.27 : size.width * 0.16,
+            height: size.width < 500 ? size.height * 0.27 : size.height * 0.38,
             top: size.width < 500 ? -45 : 0,
-            left: size.width < 500 ? 22 : size.width * 0.02,
+            left: size.width < 500 ? 22 : size.width * 0.04,
             child: Image.network(
                 "https://image.tmdb.org/t/p/w500${widget.image}",
-                height: size.height < 1000
-                    ? size.height * 0.18
-                    : size.height * 0.39,
-                width: size.width * 0.16,
                 fit: BoxFit.cover),
           ),
           Positioned(
-            right: 20,
-            bottom: size.height * 0.17,
+            right: size.width < 500 ? 20 : 60,
+            bottom: size.width < 500 ? size.height * 0.17 : 20,
             child: IconButton(
               icon: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border_outlined,

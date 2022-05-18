@@ -71,10 +71,12 @@ class PTVShows with ChangeNotifier {
 
   Future<void> searchByName(search) async {
     final apiKey = "6cd5215cc4c0bf0f6e1e11db724068f7";
+    print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
     final searchURL = Uri.parse(
         "https://api.themoviedb.org/3/search/tv?query=$search&api_key=$apiKey");
     try {
       final response = await get(searchURL);
+
       if (response.statusCode == 200) {
         final searchedData = json.decode(response.body) as Map<String, dynamic>;
         PTVShowsItems searchedPTVS = PTVShowsItems.fromJson(searchedData);
