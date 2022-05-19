@@ -44,7 +44,6 @@ class _CustomCardState extends State<CustomCard> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(9),
             ),
-            // color: Colors.orange,
             color: Color(0xff171538),
             child: Container(
               width: size.width,
@@ -70,7 +69,7 @@ class _CustomCardState extends State<CustomCard> {
                     Container(
                       width: size.width * 0.54,
                       height: size.width < 500
-                          ? size.height * 0.14
+                          ? size.height * 0.125
                           : size.height * 0.18,
                       margin: EdgeInsets.only(
                         left: size.width < 500
@@ -82,6 +81,7 @@ class _CustomCardState extends State<CustomCard> {
                       ),
                       child: Text(
                         widget.description,
+                        maxLines: 6,
                         style: TextStyle(
                             color: Colors.white70,
                             fontSize: size.width < 500 ? 12 : 20,
@@ -104,8 +104,9 @@ class _CustomCardState extends State<CustomCard> {
           ),
           Positioned(
             right: size.width < 500 ? 20 : 60,
-            bottom: size.width < 500 ? size.height * 0.17 : 20,
+            bottom: size.width < 500 ? 3 : 20,
             child: IconButton(
+              splashRadius: 1,
               icon: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
                 color: Color(0xffe4c94d),
