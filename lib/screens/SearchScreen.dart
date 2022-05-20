@@ -9,7 +9,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  // Icon customIcon = const Icon(Icons.search);
   Widget customSearchBar = const Text('Start searching');
 
   TextEditingController _title = TextEditingController();
@@ -17,7 +16,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Future<void> _saveform() async {
     String searchTitle = _title.text;
-    _isLoading = true;
+    setState(() {
+      _isLoading = true;
+    });
     try {
       await Provider.of<PTVShows>(context, listen: false)
           .searchByName(searchTitle)
@@ -41,21 +42,24 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Color(0xff18162e),
         automaticallyImplyLeading: false,
         title: Row(
-            mainAxisAlignment: size.width < 500
+            mainAxisAlignment: size.width < 700
                 ? MainAxisAlignment.center
                 : MainAxisAlignment.end,
             children: [
               Container(
                 margin: EdgeInsets.only(top: 5),
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(
+                    left: size.width < 500 ? 10 : 15,
+                    right: size.width < 500 ? 0 : 10),
                 decoration: BoxDecoration(
                   color: Color(0xff848dad),
                   borderRadius: size.width < 500
                       ? BorderRadius.circular(7)
                       : BorderRadius.circular(25),
                 ),
-                width: size.width < 500 ? size.width * 0.9 : 400,
+                width: size.width < 700 ? size.width * 0.9 : 400,
                 child: TextField(
+                  cursorColor: Color(0xffe4c94d),
                   controller: _title,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -83,7 +87,10 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       backgroundColor: Color(0xff18162e),
       body: _isLoading
-          ? CircularProgressIndicator()
+          ? Center(
+              child: CircularProgressIndicator(
+              backgroundColor: Colors.white,
+            ))
           : ListView.builder(
               itemCount: searchedList.length,
               itemBuilder: (ctx, index) {

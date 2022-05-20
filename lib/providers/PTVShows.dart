@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tv_shows/providers/PTVShowsJson.dart';
@@ -51,8 +52,8 @@ class PTVShows with ChangeNotifier {
     storeFavorites();
   }
 
-  Future<void> getAllItems() async {
-    final url = Uri.parse(BASE_URL);
+  Future<void> getItems(int page) async {
+    final url = Uri.parse("$BASE_URL${page.toString()}");
 
     try {
       final response = await get(url);
@@ -60,12 +61,15 @@ class PTVShows with ChangeNotifier {
         final extractedData =
             json.decode(response.body) as Map<String, dynamic>;
         PTVShowsItems ptvs = PTVShowsItems.fromJson(extractedData);
-        _showList = ptvs.results;
-        getFavorites();
+        _showList = [..._showList, ...ptvs.results];
+        if (page == 1) getFavorites();
         notifyListeners();
       }
     } catch (e) {
-      print(e);
+      AlertDialog(
+        title: Text("Oops some thing went wrong!"),
+        actions: [ElevatedButton(onPressed: () => {}, child: Text("Okay"))],
+      );
     }
   }
 
@@ -80,7 +84,6 @@ class PTVShows with ChangeNotifier {
       if (response.statusCode == 200) {
         final searchedData = json.decode(response.body) as Map<String, dynamic>;
         PTVShowsItems searchedPTVS = PTVShowsItems.fromJson(searchedData);
-
         _searchedTVShows = searchedPTVS.results;
       }
     } catch (e) {

@@ -4,25 +4,48 @@ import 'package:tv_shows/providers/PTVShows.dart';
 import 'package:tv_shows/widgets/CustomCard.dart';
 
 class AllTVShows extends StatefulWidget {
-  // const AllTVShows({ Key? key }) : super(key: key);
-
   @override
   State<AllTVShows> createState() => _AllTVShowsState();
 }
 
 class _AllTVShowsState extends State<AllTVShows> {
+  final int _nextPageThreshold = 5;
+  int _page = 2;
+  final int _totalPages = 6617;
+
   @override
   Widget build(BuildContext context) {
-    final ptvShowsList = Provider.of<PTVShows>(context).showList;
+    final provider = Provider.of<PTVShows>(context);
+    final ptvShowsList = provider.showList;
+    var size = MediaQuery.of(context).size;
+
     return ListView.builder(
-      itemCount: ptvShowsList.length,
+      itemCount: ptvShowsList.length + (_page != _totalPages ? 1 : 0),
       itemBuilder: (ctx, index) {
-        return CustomCard(
-          id: ptvShowsList[index].id,
-          title: ptvShowsList[index].name,
-          image: ptvShowsList[index].posterPath,
-          description: ptvShowsList[index].overview,
-        );
+        if (index == ptvShowsList.length - _nextPageThreshold &&
+            _page != _totalPages) {
+          provider.getItems(_page);
+          _page++;
+        }
+
+        return index < ptvShowsList.length
+            ? CustomCard(
+                id: ptvShowsList[index].id,
+                title: ptvShowsList[index].name,
+                image: ptvShowsList[index].posterPath,
+                description: ptvShowsList[index].overview,
+              )
+            : Container(
+                margin:
+                    EdgeInsets.symmetric(vertical: size.width < 500 ? 18 : 30),
+                width: size.width,
+                height:
+                    size.width < 500 ? size.height * 0.12 : size.height * 0.24,
+                child: Center(
+                    child: CircularProgressIndicator(
+                        // color: Colors.white,
+                        )),
+              );
       },
     );
   }

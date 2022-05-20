@@ -28,7 +28,6 @@ class _CustomCardState extends State<CustomCard> {
     bool isFavorite = favorites.any((element) => element.id == widget.id);
     var size = MediaQuery.of(context).size;
     return Container(
-      // decoration: BoxDecoration(color: Colors.red),
       margin: EdgeInsets.symmetric(vertical: size.width < 500 ? 18 : 30),
       width: size.width,
       height: size.width < 500 ? size.height * 0.24 : size.height * 0.42,
@@ -44,7 +43,7 @@ class _CustomCardState extends State<CustomCard> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(9),
             ),
-            color: Color(0xff171538),
+            color: Color(0xff28304a),
             child: Container(
               width: size.width,
               height:
@@ -131,18 +130,3 @@ class _CustomCardState extends State<CustomCard> {
     );
   }
 }
-//  Future<void> searchByName(search) async {
-//     final apiKey = "6cd5215cc4c0bf0f6e1e11db724068f7";
-//     final searchURL = Uri.parse(
-//         "https://api.themoviedb.org/3/search/tv?query=$search&api_key=$apiKey");
-//     try {
-//       final response = await get(searchURL);
-//       if (response.statusCode == 200) {
-//         final searchedData = json.decode(response.body) as Map<String, dynamic>;
-//         PTVShowsItems searchedPTVS = PTVShowsItems.fromJson(searchedData);
-//         _searchedTVShows = searchedPTVS.results;
-//       }
-//     } catch (e) {
-//       print(e);
-//     }
-//   }

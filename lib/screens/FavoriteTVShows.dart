@@ -13,6 +13,7 @@ class _FavoriteTVShowsState extends State<FavoriteTVShows> {
   @override
   Widget build(BuildContext context) {
     List<Results> favorites = Provider.of<PTVShows>(context).favorites;
+    final size = MediaQuery.of(context).size;
     return Container(
       child: favorites.isEmpty
           ? Center(
@@ -20,7 +21,7 @@ class _FavoriteTVShowsState extends State<FavoriteTVShows> {
               "No favorite is added yet, try adding some!",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: size.width < 500 ? 16 : 20,
                   fontWeight: FontWeight.bold),
             ))
           : ListView.builder(

@@ -17,7 +17,7 @@ class _AllScreenState extends State<AllScreen> {
     super.didChangeDependencies();
 
     if (_isInit) {
-      Provider.of<PTVShows>(context, listen: false).getAllItems().then((_) {});
+      Provider.of<PTVShows>(context, listen: false).getItems(1).then((_) {});
     }
     _isInit = false;
   }
