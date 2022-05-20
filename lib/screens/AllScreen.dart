@@ -29,7 +29,7 @@ class _AllScreenState extends State<AllScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: size.height * 0.06,
+          toolbarHeight: size.height * 0.065,
           backgroundColor: Color(0xff18162e),
           bottom: TabBar(
             tabs: [

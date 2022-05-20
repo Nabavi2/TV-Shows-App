@@ -40,38 +40,46 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff18162e),
         automaticallyImplyLeading: false,
-        title: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(25),
-            ),
-            width: size.width < 500 ? size.width * 1 : 400,
-            child: TextField(
-              controller: _title,
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.search,
+        title: Row(
+            mainAxisAlignment: size.width < 500
+                ? MainAxisAlignment.center
+                : MainAxisAlignment.end,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(left: 10),
+                decoration: BoxDecoration(
+                  color: Color(0xff848dad),
+                  borderRadius: size.width < 500
+                      ? BorderRadius.circular(7)
+                      : BorderRadius.circular(25),
+                ),
+                width: size.width < 500 ? size.width * 0.9 : 400,
+                child: TextField(
+                  controller: _title,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: size.width < 500 ? 35 : 25,
+                      ),
+                      onPressed: () => _saveform(),
+                    ),
+                    hintText: 'Type show name',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  style: TextStyle(
                     color: Colors.white,
                   ),
-                  onPressed: () => _saveform(),
                 ),
-                hintText: 'Type movie name',
-                hintStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontStyle: FontStyle.italic,
-                ),
-                border: InputBorder.none,
               ),
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ]),
+            ]),
       ),
       backgroundColor: Color(0xff18162e),
       body: _isLoading
