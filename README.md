@@ -1,2 +1,2 @@
 # TV-Shows-test
-This repository is only for testing
+This repository is for a small test Flutter project 
