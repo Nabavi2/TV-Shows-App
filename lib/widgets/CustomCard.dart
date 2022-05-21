@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tv_shows/providers/PTVShows.dart';
@@ -119,8 +121,19 @@ class _CustomCardState extends State<CustomCard> {
                       }
                     else
                       {
-                        provider.addToFavorites(provider.showList
-                            .firstWhere((element) => element.id == widget.id))
+                        if (provider.showList
+                            .any((element) => element.id == widget.id))
+                          {
+                            provider.addToFavorites(provider.showList
+                                .firstWhere(
+                                    (element) => element.id == widget.id))
+                          }
+                        else
+                          {
+                            provider.addToFavorites(provider.searchedTVShows
+                                .firstWhere(
+                                    (element) => element.id == widget.id))
+                          }
                       }
                   }),
             ),
